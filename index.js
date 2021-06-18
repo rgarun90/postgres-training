@@ -1,6 +1,37 @@
-const { Sequelize } = require('sequelize');
+// const { Sequelize } = require('sequelize');
+const express = require('express');
 
-const { Movie } = require('./model');
+const apiRoutes = require('./server/apiRoutes');
+
+const app = express();
+app.use(express.json());
+
+app.use('/api', apiRoutes());
+
+app.listen(3000, () => {
+    console.log('Server is up and and running in port 3000');
+})
+
+
+// const createNewMovie = async () => {
+//     const movieId = `MV-${moment().unix()}`;
+//     const movieRecord = {
+//         movieId,
+//         title: 'Tenet',
+//         year: 2020,
+//         length: '120min',
+//         actors: 'Robert'
+//     }
+
+//     const result = await Movie.create(movieRecord);
+
+//     console.log(result.toJSON());
+// }
+
+// createNewMovie();
+
+// npm i -S sequelize pg pg-hstore
+
 
 
 // const connectToDatabase = async () => {
@@ -19,21 +50,3 @@ const { Movie } = require('./model');
 //         console.error('Unable to connect to the database:', error);
 //     }
 // }
-
-const createNewMovie = async () => {
-    const movieRecord = {
-        movieId: 'MV-789789',
-        title: 'Tenet',
-        year: 2020,
-        length: '120min',
-        actors: 'Robert'
-    }
-
-    const result = await Movie.create(movieRecord);
-
-    console.log(result.toJSON());
-}
-
-createNewMovie();
-
-// npm i -S sequelize pg pg-hstore
